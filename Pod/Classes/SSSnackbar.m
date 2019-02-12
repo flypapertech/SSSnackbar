@@ -104,23 +104,7 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
 }
 
 - (void)show {
-    UIViewController *topViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    while (true)
-    {
-        if (topViewController.presentedViewController) {
-            topViewController = topViewController.presentedViewController;
-        } else if ([topViewController isKindOfClass:[UINavigationController class]]) {
-            UINavigationController *nav = (UINavigationController *)topViewController;
-            topViewController = nav.topViewController;
-        } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
-            UITabBarController *tab = (UITabBarController *)topViewController;
-            topViewController = tab.selectedViewController;
-        } else {
-            break;
-        }
-    }
-    
-    UIView *superview = topViewController.view;
+    UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
     
     BOOL shouldReplaceExistingSnackbar = currentlyVisibleSnackbar != nil;
     
@@ -129,21 +113,21 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
         [currentlyVisibleSnackbar dismissAnimated:NO];
     }
     
-    [superview addSubview:self];
-    [superview addConstraints:self.horizontalLayoutConstraints];
-    [superview addConstraints:shouldReplaceExistingSnackbar ? self.visibleVerticalLayoutConstraints : self.hiddenVerticalLayoutConstraints];
-    [superview layoutIfNeeded];
+    [mainWindow addSubview:self];
+    [mainWindow addConstraints:self.horizontalLayoutConstraints];
+    [mainWindow addConstraints:shouldReplaceExistingSnackbar ? self.visibleVerticalLayoutConstraints : self.hiddenVerticalLayoutConstraints];
+    [mainWindow layoutIfNeeded];
     [self setupContentLayout];
     
     if (!shouldReplaceExistingSnackbar) {
-        [superview removeConstraints:self.hiddenVerticalLayoutConstraints];
-        [superview addConstraints:self.visibleVerticalLayoutConstraints];
+        [mainWindow removeConstraints:self.hiddenVerticalLayoutConstraints];
+        [mainWindow addConstraints:self.visibleVerticalLayoutConstraints];
         
         [UIView animateWithDuration:0.2
                               delay:0
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
-                             [superview layoutIfNeeded];
+                             [mainWindow layoutIfNeeded];
                          }
                          completion:nil];
     }
