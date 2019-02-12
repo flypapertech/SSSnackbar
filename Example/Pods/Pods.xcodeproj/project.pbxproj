@@ -980,7 +980,7 @@
 				LastUpgradeCheck = 0640;
 				TargetAttributes = {
 					B82902DD2C49D96F4C8A0CBB = {
-						DevelopmentTeam = 4S3X5HAA4F;
+						DevelopmentTeam = D5CHXS57H3;
 					};
 				};
 			};
@@ -1329,7 +1329,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4S3X5HAA4F;
+				DEVELOPMENT_TEAM = D5CHXS57H3;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1601,7 +1601,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4S3X5HAA4F;
+				DEVELOPMENT_TEAM = D5CHXS57H3;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

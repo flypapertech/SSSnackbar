@@ -104,12 +104,23 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
 }
 
 - (void)show {
-    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    while (topController.presentedViewController) {
-        topController = topController.presentedViewController;
+    UIViewController *topViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    while (true)
+    {
+        if (topViewController.presentedViewController) {
+            topViewController = topViewController.presentedViewController;
+        } else if ([topViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *nav = (UINavigationController *)topViewController;
+            topViewController = nav.topViewController;
+        } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
+            UITabBarController *tab = (UITabBarController *)topViewController;
+            topViewController = tab.selectedViewController;
+        } else {
+            break;
+        }
     }
     
-    UIView *superview = topController.view;
+    UIView *superview = topViewController.view;
     
     BOOL shouldReplaceExistingSnackbar = currentlyVisibleSnackbar != nil;
     
